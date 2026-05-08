@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>空調メンテナンス / BRAVE｜業務用エアコンの修理・洗浄・点検</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy-900: #0a1f3d;
+    --navy-800: #102a4d;
+    --navy-700: #163a6b;
+    --blue-600: #1d5cb8;
+    --blue-500: #2a72db;
+    --blue-50: #eaf2fc;
+    --gray-900: #0f172a;
+    --gray-700: #334155;
+    --gray-600: #475569;
+    --gray-500: #64748b;
+    --gray-400: #94a3b8;
+    --gray-300: #cbd5e1;
+    --gray-200: #e2e8f0;
+    --gray-100: #f1f5f9;
+    --gray-50: #f7f9fc;
+    --white: #ffffff;
+    --accent: #f59e0b;
+    --line-green: #06c755;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+    color: var(--gray-900);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+    font-feature-settings: "palt";
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ============ Header ============ */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--navy-900), var(--blue-600));
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+  .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+  .logo-text-name {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.04em;
+    color: var(--navy-900);
+  }
+  .logo-text-sub {
+    font-size: 10.5px;
+    color: var(--gray-500);
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .nav { display: flex; align-items: center; gap: 32px; }
+  .nav a {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--gray-700);
+    transition: color .15s;
+    position: relative;
+  }
+  .nav a:hover { color: var(--blue-600); }
+  .nav-cta {
+    background: var(--navy-900);
+    color: white !important;
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: background .15s, transform .15s;
+  }
+  .nav-cta:hover { background: var(--blue-600); transform: translateY(-1px); }
+  .nav-tel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--navy-900);
+    font-weight: 700;
+  }
+  .nav-tel-num {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+  }
+  .nav-tel-sub { font-size: 10.5px; color: var(--gray-500); font-weight: 500; }
+  .menu-toggle { display: none; }
+  @media (max-width: 900px) {
+    .nav { display: none; }
+    .nav.open {
+      display: flex;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      background: white;
+      padding: 16px 20px 20px;
+      gap: 0;
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.1);
+    }
+    .nav.open a {
+      padding: 14px 4px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 15px;
+    }
+    .nav.open .nav-cta { margin-top: 12px; text-align: center; border-bottom: none; }
+    .nav.open .nav-tel { padding: 14px 4px; }
+    .menu-toggle {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      color: var(--navy-900);
+    }
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, #f7f9fc 0%, #eaf2fc 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(10,31,61,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10,31,61,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    mask-image: linear-gradient(180deg, white 30%, transparent 100%);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--gray-200);
+    color: var(--navy-800);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #06c755;
+    box-shadow: 0 0 0 4px rgba(6,199,85,0.15);
+  }
+  .hero h1 {
+    font-size: 52px;
+    line-height: 1.25;
+    letter-spacing: 0.005em;
+    font-weight: 700;
+    color: var(--navy-900);
+    margin: 0 0 24px;
+  }
+  .hero h1 .accent {
+    color: var(--blue-600);
+    background: linear-gradient(180deg, transparent 60%, rgba(42,114,219,0.18) 60%);
+    padding: 0 4px;
+  }
+  .hero h1 .brand {
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--gray-700);
+    line-height: 1.95;
+    margin: 0 0 36px;
+    max-width: 540px;
+  }
+  .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 26px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: transform .15s, box-shadow .15s, background .15s;
+    white-space: nowrap;
+  }
+  .btn-line {
+    background: var(--line-green);
+    color: white;
+    box-shadow: 0 6px 20px -6px rgba(6,199,85,0.5);
+  }
+  .btn-line:hover { transform: translateY(-2px); box-shadow: 0 10px 28px -8px rgba(6,199,85,0.55); }
+  .btn-tel {
+    background: white;
+    color: var(--navy-900);
+    border: 1.5px solid var(--navy-900);
+  }
+  .btn-tel:hover { background: var(--navy-900); color: white; }
+  .btn-primary {
+    background: var(--navy-900);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--blue-600); transform: translateY(-2px); }
+  .btn-outline {
+    background: white;
+    color: var(--navy-900);
+    border: 1.5px solid var(--gray-300);
+  }
+  .btn-outline:hover { border-color: var(--navy-900); }
+
+  .hero-stats {
+    margin-top: 48px;
+    display: flex;
+    gap: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .hero-stat-num {
+    font-family: "Inter", sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy-900);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .hero-stat-num small { font-size: 14px; font-weight: 600; }
+  .hero-stat-label { font-size: 12px; color: var(--gray-500); margin-top: 6px; font-weight: 500; }
+
+  .hero-image {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(10,31,61,0.35);
+  }
+  .photo-placeholder {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        var(--navy-800) 0 12px,
+        var(--navy-700) 12px 24px
+      );
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    color: rgba(255,255,255,0.85);
+    padding: 24px;
+  }
+  .photo-placeholder-inner {
+    background: rgba(10,31,61,0.85);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 12px 16px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    max-width: 280px;
+  }
+  .photo-tag {
+    font-family: "JetBrains Mono", "Menlo", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .photo-desc {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.95);
+    font-weight: 500;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 14px 30px -10px rgba(10,31,61,0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-badge-icon {
+    width: 38px; height: 38px;
+    background: var(--navy-900);
+    color: white;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-weight: 800;
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+  }
+  .hero-badge-text { line-height: 1.3; }
+  .hero-badge-title { font-size: 12.5px; font-weight: 700; color: var(--navy-900); }
+  .hero-badge-sub { font-size: 10.5px; color: var(--gray-500); margin-top: 2px; }
+
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding: 40px 20px 60px;
+    }
+    .hero h1 { font-size: 32px; }
+    .hero-sub { font-size: 14.5px; }
+    .hero-image { aspect-ratio: 4/3; order: -1; }
+    .hero-stats { gap: 20px; flex-wrap: wrap; }
+  }
+
+  /* ============ Section base ============ */
+  section { scroll-margin-top: 80px; }
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 24px;
+  }
+  .section-eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--blue-600);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--blue-600);
+  }
+  .section-title {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--navy-900);
+    margin: 0 0 18px;
+    letter-spacing: 0.005em;
+  }
+  .section-lead {
+    font-size: 15.5px;
+    color: var(--gray-600);
+    line-height: 1.95;
+    max-width: 640px;
+    margin: 0 0 56px;
+  }
+  @media (max-width: 700px) {
+    .section { padding: 64px 20px; }
+    .section-title { font-size: 26px; }
+    .section-lead { margin-bottom: 36px; font-size: 14.5px; }
+  }
+
+  /* ============ Troubles ============ */
+  .troubles-bg { background: var(--gray-50); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
+  .troubles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .trouble-card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .trouble-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 30px -18px rgba(10,31,61,0.25);
+    border-color: var(--blue-500);
+  }
+  .trouble-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--blue-50);
+    color: var(--blue-600);
+    display: grid;
+    place-items: center;
+  }
+  .trouble-text { font-size: 15px; font-weight: 600; color: var(--gray-900); line-height: 1.5; }
+  .troubles-foot {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy-900);
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    border: 1px dashed var(--blue-500);
+  }
+  @media (max-width: 900px) { .troubles-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .troubles-grid { grid-template-columns: 1fr; } .trouble-card { padding: 20px; } }
+
+  /* ============ Services ============ */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+    transition: transform .2s, box-shadow .2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px -24px rgba(10,31,61,0.3);
+  }
+  .service-image {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-num {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: white;
+    color: var(--navy-900);
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    z-index: 2;
+  }
+  .service-body { padding: 28px 26px 32px; flex: 1; display: flex; flex-direction: column; }
+  .service-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-900);
+    margin: 0 0 12px;
+    letter-spacing: 0.01em;
+  }
+  .service-desc {
+    font-size: 14.5px;
+    color: var(--gray-600);
+    line-height: 1.85;
+    margin: 0 0 20px;
+    flex: 1;
+  }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .service-tag {
+    font-size: 12px;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  @media (max-width: 700px) { .services-grid { grid-template-columns: 1fr; } }
+
+  /* ============ Reasons ============ */
+  .reasons-bg {
+    background: var(--navy-900);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .reasons-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(42,114,219,0.25), transparent 50%),
+                      radial-gradient(circle at 85% 70%, rgba(42,114,219,0.18), transparent 55%);
+    pointer-events: none;
+  }
+  .reasons-bg .section-title { color: white; }
+  .reasons-bg .section-lead { color: rgba(255,255,255,0.7); }
+  .reasons-bg .section-eyebrow { color: #6ba6f5; }
+  .reasons-bg .section-eyebrow::before { background: #6ba6f5; }
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+  .reason-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 36px 30px;
+    backdrop-filter: blur(6px);
+    transition: transform .2s, background .2s, border-color .2s;
+  }
+  .reason-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .reason-num {
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    color: #6ba6f5;
+    margin-bottom: 18px;
+  }
+  .reason-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 0 0 16px;
+    color: white;
+  }
+  .reason-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.95;
+    margin: 0 0 24px;
+  }
+  .reason-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .reason-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 900px) { .reasons-grid { grid-template-columns: 1fr; } }
+
+  /* ============ Cases ============ */
+  .case-block { margin-bottom: 64px; }
+  .case-block:last-child { margin-bottom: 0; }
+  .case-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .case-num {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    color: var(--blue-600);
+    font-size: 14px;
+    letter-spacing: 0.12em;
+  }
+  .case-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy-900);
+    margin: 0;
+  }
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .ba-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--gray-100);
+  }
+  .ba-label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: white;
+    color: var(--navy-900);
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    border-radius: 6px;
+    z-index: 2;
+  }
+  .ba-label.after {
+    background: var(--blue-600);
+    color: white;
+  }
+  .case-caption {
+    font-size: 14.5px;
+    color: var(--gray-600);
+    line-height: 1.85;
+    background: var(--gray-50);
+    padding: 18px 22px;
+    border-radius: 10px;
+    border-left: 3px solid var(--blue-600);
+  }
+  .case2-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .case2-grid .photo-placeholder { aspect-ratio: 4/3; }
+  @media (max-width: 700px) {
+    .ba-grid, .case2-grid { grid-template-columns: 1fr; }
+    .case-title { font-size: 19px; }
+  }
+
+  /* ============ Contact ============ */
+  .contact-bg {
+    background: linear-gradient(180deg, var(--gray-50), white);
+    border-top: 1px solid var(--gray-100);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .contact-cta-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+    max-width: 440px;
+  }
+  .contact-cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 12px;
+    transition: transform .15s, box-shadow .15s;
+    border: 1.5px solid transparent;
+  }
+  .contact-cta:hover { transform: translateY(-2px); }
+  .contact-cta-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .contact-cta-text { flex: 1; }
+  .contact-cta-title { font-weight: 700; font-size: 15px; }
+  .contact-cta-sub { font-size: 12.5px; opacity: 0.8; margin-top: 2px; }
+  .contact-cta-arrow { opacity: 0.6; }
+  .contact-cta.line { background: var(--line-green); color: white; }
+  .contact-cta.line .contact-cta-icon { background: rgba(255,255,255,0.2); }
+  .contact-cta.tel { background: white; color: var(--navy-900); border-color: var(--navy-900); }
+  .contact-cta.tel .contact-cta-icon { background: var(--navy-900); color: white; }
+  .contact-cta.mail { background: white; color: var(--navy-900); border-color: var(--gray-300); }
+  .contact-cta.mail .contact-cta-icon { background: var(--gray-100); color: var(--navy-900); }
+
+  .company-card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 36px 32px;
+  }
+  .company-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .company-table { width: 100%; border-collapse: collapse; }
+  .company-table tr { border-bottom: 1px solid var(--gray-100); }
+  .company-table tr:last-child { border-bottom: none; }
+  .company-table th, .company-table td {
+    padding: 14px 0;
+    text-align: left;
+    vertical-align: top;
+    font-size: 13.5px;
+  }
+  .company-table th {
+    width: 110px;
+    font-weight: 600;
+    color: var(--gray-500);
+    letter-spacing: 0.04em;
+  }
+  .company-table td { color: var(--gray-900); font-weight: 500; line-height: 1.7; }
+  .qual-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .qual-pill {
+    background: var(--blue-50);
+    color: var(--blue-600);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ============ Footer ============ */
+  .footer {
+    background: var(--navy-900);
+    color: rgba(255,255,255,0.7);
+    padding: 40px 24px;
+    text-align: center;
+    font-size: 12.5px;
+  }
+  .footer .logo-mark { background: white; color: var(--navy-900); }
+  .footer-logo { display: inline-flex; margin-bottom: 16px; }
+  .footer-meta { font-family: "Inter", sans-serif; letter-spacing: 0.04em; }
+
+  /* ============ Mobile fixed CTA ============ */
+  .mobile-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    background: white;
+    border-top: 1px solid var(--gray-200);
+    padding: 8px;
+    gap: 6px;
+    box-shadow: 0 -8px 24px -10px rgba(0,0,0,0.1);
+  }
+  .mobile-cta a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    gap: 4px;
+  }
+  .mobile-cta a.line { background: var(--line-green); color: white; }
+  .mobile-cta a.tel { background: var(--navy-900); color: white; }
+  .mobile-cta a.mail { background: white; color: var(--navy-900); border: 1.5px solid var(--gray-300); }
+  @media (max-width: 700px) {
+    .mobile-cta { display: flex; }
+    body { padding-bottom: 80px; }
+  }
+
+  /* ============ Animations ============ */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#top" class="logo" aria-label="BRAVE Home">
+      <div class="logo-mark">B</div>
+      <div class="logo-text">
+        <span class="logo-text-name">BRAVE</span>
+        <span class="logo-text-sub">空調メンテナンス</span>
+      </div>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#services">サービス</a>
+      <a href="#cases">実績</a>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#contact">お問い合わせ</a>
+      <div class="nav-tel" aria-label="電話番号">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div>
+          <div class="nav-tel-num">000-0000-0000</div>
+          <div class="nav-tel-sub">受付 8:00 - 19:00</div>
+        </div>
+      </div>
+      <a href="#contact" class="nav-cta">お問い合わせ</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="メニュー">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ Hero ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        <span>東海エリア対応 ・ 法人様向け空調設備</span>
+      </div>
+      <h1>
+        業務用エアコンの<br>
+        <span class="accent">修理・洗浄・点検</span>なら<br>
+        <span class="brand">BRAVE</span>へ。
+      </h1>
+      <p class="hero-sub">
+        東海エリアを中心に、店舗・工場・施設・法人様の空調設備をサポート。<br>
+        GHP・EHPエアコンのメンテナンスから入替工事まで対応します。
+      </p>
+      <div class="hero-cta-row">
+        <a href="#" class="btn btn-line">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.63 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.346 0-.627-.285-.627-.629V8.108c0-.345.281-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINEで写真を送って相談
+        </a>
+        <a href="tel:0000000000" class="btn btn-tel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          電話で相談
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">GHP<small>・</small>EHP</div>
+          <div class="hero-stat-label">業務用エアコン全般対応</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">2<small>つの</small></div>
+          <div class="hero-stat-label">国家資格を保有</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">東海<small>エリア</small></div>
+          <div class="hero-stat-label">愛知・岐阜・三重・静岡</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="photo-placeholder">
+        <div class="photo-placeholder-inner">
+          <div class="photo-tag">PHOTO ・ HERO</div>
+          <div class="photo-desc">屋外で業務用空調設備（室外機・配管まわり）を点検する作業員の写真。工具やホースが写り、現場対応力が伝わるカット。</div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-icon">✓</div>
+        <div class="hero-badge-text">
+          <div class="hero-badge-title">有資格者対応</div>
+          <div class="hero-badge-sub">代表が現場で対応します</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. お困りごと ============ -->
+<div class="troubles-bg">
+  <section class="section" id="troubles">
+    <div class="section-eyebrow">TROUBLES</div>
+    <h2 class="section-title">こんな空調トラブル、<br>ありませんか？</h2>
+    <p class="section-lead">
+      業務用エアコンの不調は、放置すると業務にも光熱費にも影響します。<br>
+      気になる症状があれば、まずはお気軽にご相談ください。
+    </p>
+
+    <div class="troubles-grid">
+      <div class="trouble-card">
+        <div class="trouble-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2"/><path d="M17.73 2.27A2.5 2.5 0 1 1 19.5 6.5H2"/><path d="M14.05 19.41A2 2 0 1 0 15.5 16H2"/></svg>
+        </div>
+        <div class="trouble-text">エアコンの<br>効きが悪い</div>
+      </div>
+      <div class="trouble-card">
+        <div class="trouble-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+        </div>
+        <div class="trouble-text">異音がする</div>
+      </div>
+      <div class="trouble-card">
+        <div class="trouble-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M12 22a8 8 0 0 0 8-8c0-3.5-2.5-6-5-9-1.5-1.8-3-3-3-3s-1.5 1.2-3 3c-2.5 3-5 5.5-5 9a8 8 0 0 0 8 8z"/></svg>
+        </div>
+        <div class="trouble-text">水漏れしている</div>
+      </div>
+      <div class="trouble-card">
+        <div class="trouble-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c4 0 6-2 9-2s5 2 9 2"/><path d="M3 14c4 0 6-2 9-2s5 2 9 2"/><path d="M3 20c4 0 6-2 9-2s5 2 9 2"/></svg>
+        </div>
+        <div class="trouble-text">ニオイが気になる</div>
+      </div>
+      <div class="trouble-card">
+        <div class="trouble-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="trouble-text">定期点検を<br>任せたい</div>
+      </div>
+      <div class="trouble-card">
+        <div class="trouble-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8L17 4 3 18v3h3z"/><path d="M14 7l3 3"/></svg>
+        </div>
+        <div class="trouble-text">古い業務用機を<br>入れ替えたい</div>
+      </div>
+    </div>
+
+    <div class="troubles-foot">
+      修理・洗浄・点検・入替まで、現場の状況に合わせて対応します。
+    </div>
+  </section>
+</div>
+
+<!-- ============ 3. Services ============ -->
+<section class="section" id="services">
+  <div class="section-eyebrow">SERVICES</div>
+  <h2 class="section-title">対応サービス</h2>
+  <p class="section-lead">
+    業務用空調まわりの「困った」を、現場目線でひとつずつ解決します。
+  </p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-image">
+        <div class="service-num">01</div>
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ SERVICE 01</div>
+            <div class="photo-desc">銅管・配線・機器内部を作業員が確認している写真。専門的な点検・修理対応が伝わる。</div>
+          </div>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3 class="service-title">修理・トラブル対応</h3>
+        <p class="service-desc">
+          効きが悪い、動かない、水漏れ、異音など、業務用エアコンの不具合に対応します。原因を特定し、最適な方法でご提案します。
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">冷えない/効かない</span>
+          <span class="service-tag">水漏れ</span>
+          <span class="service-tag">異音・異臭</span>
+          <span class="service-tag">エラー対応</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-image">
+        <div class="service-num">02</div>
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ SERVICE 02</div>
+            <div class="photo-desc">天井埋込型の業務用エアコン室内機の写真。内部洗浄サービスのイメージとして使用。</div>
+          </div>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3 class="service-title">洗浄・クリーニング</h3>
+        <p class="service-desc">
+          室内機内部の汚れやホコリを洗浄し、空調効率の維持やニオイ対策をサポートします。分解洗浄にも対応します。
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">分解洗浄</span>
+          <span class="service-tag">天カセ型</span>
+          <span class="service-tag">ニオイ対策</span>
+          <span class="service-tag">省エネ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-image">
+        <div class="service-num">03</div>
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ SERVICE 03</div>
+            <div class="photo-desc">作業員が工具やホースを使って空調設備を確認している写真。定期点検・現場対応の印象を出す。</div>
+          </div>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3 class="service-title">点検・メンテナンス</h3>
+        <p class="service-desc">
+          故障予防や性能維持を目的に、定期的な点検・メンテナンスに対応します。法人様の年間保守も承ります。
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">定期点検</span>
+          <span class="service-tag">予防保全</span>
+          <span class="service-tag">年間契約</span>
+          <span class="service-tag">省エネ診断</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-image">
+        <div class="service-num">04</div>
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ SERVICE 04</div>
+            <div class="photo-desc">大型の業務用空調設備が写っている現場写真。法人・施設向けの工事対応が伝わる。</div>
+          </div>
+        </div>
+      </div>
+      <div class="service-body">
+        <h3 class="service-title">新設・入替工事</h3>
+        <p class="service-desc">
+          店舗・工場・施設などの環境に合わせて、業務用エアコンの新設・入替工事にも対応します。機種選定からご相談ください。
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">新設工事</span>
+          <span class="service-tag">入替・更新</span>
+          <span class="service-tag">機種選定</span>
+          <span class="service-tag">GHP/EHP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. Reasons ============ -->
+<div class="reasons-bg">
+  <section class="section" id="reasons">
+    <div class="section-eyebrow">WHY BRAVE</div>
+    <h2 class="section-title">BRAVEが<br>選ばれる理由</h2>
+    <p class="section-lead">
+      地元・東海エリアの法人様から、安心して任せていただくために。
+    </p>
+
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-num">REASON ・ 01</div>
+        <h3 class="reason-title">有資格者が<br>現場対応</h3>
+        <p class="reason-desc">
+          第二種電気工事士・第二種冷媒フロン類取扱技術者の資格を持つ代表が対応。空調設備に必要な専門知識をもとに、丁寧に点検・施工します。
+        </p>
+        <div class="reason-badges">
+          <span class="reason-badge">第二種電気工事士</span>
+          <span class="reason-badge">冷媒フロン類取扱技術者</span>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-num">REASON ・ 02</div>
+        <h3 class="reason-title">業務用空調に<br>特化した対応</h3>
+        <p class="reason-desc">
+          GHP・EHPエアコンを中心に、店舗・工場・施設・法人様の空調設備に対応します。家庭用とは異なる業務用機の構造・知識に通じています。
+        </p>
+        <div class="reason-badges">
+          <span class="reason-badge">GHPエアコン</span>
+          <span class="reason-badge">EHPエアコン</span>
+          <span class="reason-badge">天カセ・ビル用マルチ</span>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-num">REASON ・ 03</div>
+        <h3 class="reason-title">修理から保守まで<br>まとめて相談</h3>
+        <p class="reason-desc">
+          一度きりの修理だけでなく、洗浄・点検・メンテナンスまでまとめて相談できます。設備を長く健全に使うための窓口になります。
+        </p>
+        <div class="reason-badges">
+          <span class="reason-badge">ワンストップ対応</span>
+          <span class="reason-badge">LINE相談OK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ 5. Cases ============ -->
+<section class="section" id="cases">
+  <div class="section-eyebrow">CASES</div>
+  <h2 class="section-title">作業実績</h2>
+  <p class="section-lead">
+    実際の現場でお預かりした業務用空調の作業実績です。
+  </p>
+
+  <!-- Case 1: Before / After -->
+  <div class="case-block">
+    <div class="case-header">
+      <div class="case-num">CASE ・ 01</div>
+      <h3 class="case-title">室内機内部 洗浄作業</h3>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-item">
+        <div class="ba-label">BEFORE / 作業前</div>
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ BEFORE</div>
+            <div class="photo-desc">天井埋込型の業務用エアコン室内機（洗浄前の状態）。フィン・ファンに付着した汚れが見える状態。</div>
+          </div>
+        </div>
+      </div>
+      <div class="ba-item">
+        <div class="ba-label after">AFTER / 作業後</div>
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ AFTER</div>
+            <div class="photo-desc">同じ天井埋込型の業務用エアコン室内機（洗浄後の状態）。汚れが落ち、清潔になったカット。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="case-caption">
+      室内機内部の洗浄により、空調効率の維持やニオイ対策をサポートします。
+    </div>
+  </div>
+
+  <!-- Case 2 -->
+  <div class="case-block">
+    <div class="case-header">
+      <div class="case-num">CASE ・ 02</div>
+      <h3 class="case-title">業務用空調設備の点検作業</h3>
+    </div>
+    <div class="case2-grid">
+      <div class="ba-item">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ FIELD</div>
+            <div class="photo-desc">屋外の設備スペースで、作業員が空調設備や配管まわりを確認している写真。現場対応の様子が伝わる。</div>
+          </div>
+        </div>
+      </div>
+      <div class="ba-item">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-inner">
+            <div class="photo-tag">PHOTO ・ DETAIL</div>
+            <div class="photo-desc">配管・内部機器のアップ写真。専門的な点検対応のディテールカット。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="case-caption">
+      室外機や配管まわりまで確認し、空調設備の安定稼働をサポートします。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. Contact ============ -->
+<div class="contact-bg">
+  <section class="section" id="contact">
+    <div class="contact-grid">
+      <div>
+        <div class="section-eyebrow">CONTACT</div>
+        <h2 class="section-title">空調設備のことなら<br>お気軽にご相談ください</h2>
+        <p class="section-lead" style="margin-bottom: 0;">
+          業務用エアコンの不具合、洗浄、点検、入替工事など、空調設備に関するご相談を承っています。LINEから写真を送っていただくと、状況確認がスムーズです。
+        </p>
+
+        <div class="contact-cta-row">
+          <a href="#" class="contact-cta line">
+            <div class="contact-cta-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.63 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.346 0-.627-.285-.627-.629V8.108c0-.345.281-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+            </div>
+            <div class="contact-cta-text">
+              <div class="contact-cta-title">LINEで写真を送って相談する</div>
+              <div class="contact-cta-sub">@brave_setsubi ・ 24時間受付</div>
+            </div>
+            <svg class="contact-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="tel:0000000000" class="contact-cta tel">
+            <div class="contact-cta-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-cta-text">
+              <div class="contact-cta-title">電話で相談する</div>
+              <div class="contact-cta-sub">000-0000-0000 ・ 8:00 - 19:00</div>
+            </div>
+            <svg class="contact-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="mailto:info@example.com" class="contact-cta mail">
+            <div class="contact-cta-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-cta-text">
+              <div class="contact-cta-title">メールで問い合わせる</div>
+              <div class="contact-cta-sub">フォームから送信できます</div>
+            </div>
+            <svg class="contact-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="company-card">
+        <div class="company-logo-row">
+          <div class="logo-mark" style="width:42px;height:42px;font-size:20px;">B</div>
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-weight:800;font-size:20px;color:var(--navy-900);letter-spacing:0.04em;">BRAVE</div>
+            <div style="font-size:12px;color:var(--gray-500);">空調メンテナンス</div>
+          </div>
+        </div>
+        <table class="company-table">
+          <tr><th>屋号</th><td>空調メンテナンス / BRAVE</td></tr>
+          <tr><th>代表</th><td>椙村 優大</td></tr>
+          <tr><th>所在地</th><td>愛知県弥富市</td></tr>
+          <tr><th>対応エリア</th><td>東海エリア中心<br><span style="font-size:12px;color:var(--gray-500);">愛知 / 岐阜 / 三重 / 静岡</span></td></tr>
+          <tr><th>対応業務</th><td>業務用エアコンの修理・洗浄・点検・新設・入替</td></tr>
+          <tr>
+            <th>資格</th>
+            <td>
+              <div class="qual-list">
+                <span class="qual-pill">第二種電気工事士</span>
+                <span class="qual-pill">第二種冷媒フロン類取扱技術者</span>
+              </div>
+            </td>
+          </tr>
+          <tr><th>Instagram</th><td><a href="https://instagram.com/brave_setsubi" style="color:var(--blue-600);font-weight:600;">@brave_setsubi</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="footer-logo logo">
+    <div class="logo-mark">B</div>
+    <div class="logo-text">
+      <span class="logo-text-name" style="color:white;">BRAVE</span>
+      <span class="logo-text-sub" style="color:rgba(255,255,255,0.6);">空調メンテナンス</span>
+    </div>
+  </div>
+  <div class="footer-meta">© 2026 BRAVE / 空調メンテナンス. All rights reserved.</div>
+</footer>
+
+<!-- ============ Mobile fixed CTA ============ -->
+<div class="mobile-cta">
+  <a href="#" class="line" aria-label="LINE相談">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.63 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.346 0-.627-.285-.627-.629V8.108c0-.345.281-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    LINE相談
+  </a>
+  <a href="tel:0000000000" class="tel" aria-label="電話">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    電話
+  </a>
+  <a href="#contact" class="mail" aria-label="問い合わせ">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    問い合わせ
+  </a>
+</div>
+
+<script>
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('nav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  // Fade-in observer
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.section, .hero-image, .trouble-card, .service-card, .reason-card, .case-block').forEach(el => {
+    el.classList.add('fade-in');
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
